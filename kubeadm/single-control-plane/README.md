@@ -89,13 +89,20 @@ apt-mark hold kubelet kubeadm kubectl
 ``
 ## Initialize kubeadm on control plane node
 Run on each control plane node
-```
+```bash
 #192.168.0.0/16 is compatible with Calico network plugin
 kubeadm init --pod-network-cidr=192.168.0.0/16
 ```
 
-To allow scheduling pods on control plan nodes(in case of single node):
+To start using your cluster, you need to run the following as a regular user:
+```bash
+mkdir -p $HOME/.kube
+sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+sudo chown $(id -u):$(id -g) $HOME/.kube/config
 ```
+
+To allow scheduling pods on control plan nodes(in case of single node):
+```bash
 kubectl taint nodes --all node-role.kubernetes.io/master-
 ```
 ## Install network plugin (Calico)

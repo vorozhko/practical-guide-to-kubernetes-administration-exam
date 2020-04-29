@@ -38,6 +38,14 @@ To access our api server from laptop require public load balancer which will for
 
 Internet facing NLB require instances security group to open inbound connection from client ips, so if our client is laptop it mean to open connection to VPN public ip.
 
+To start using your cluster, you need to run the following as a regular user:
+```bash
+mkdir -p $HOME/.kube
+sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+sudo chown $(id -u):$(id -g) $HOME/.kube/config
+```
+
+
 ### Install network plugin
 
 >Note: Some CNI network plugins like Calico require a CIDR such as 192.168.0.0/16 and some like Weave do not. See the [CNI network documentation](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/#pod-network).

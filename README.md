@@ -10,6 +10,8 @@ For Terraform templates to work you need to prepare default aws profile and adju
 ### Install single control palne Kubernetes with kubeadm
 See [Practical guide to Kubernetes Single control plane with Kubeadm](kubeadm/single-control-plane/README.md)
 
+If you prefer Vagrant box see [how to run Kubernetes Single control plane with Vagrant](vagrant/kubernetes/README.md)
+
 ### Configure High Available Kubernetes cluster
 See [Practical guide to High Available Kubernetes control plane with Terraform](kubeadm/ha-control-plane/README.md)
 
