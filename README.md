@@ -32,6 +32,8 @@ See [Practical guide to PodSecurityPolicy](security/podsecuritypolicy/README.md)
 See [Quick test of NetworkPolicy](security/networkpolicy/README.md)
 ### Manage TLS Certificates in a Cluster
 See [Practical guide to secure cluster communications](guides/secure-cluster-communications.md)
+### Configure Security Context for a Pod
+See [Quick test of Security Context for a Pod](security/securitycontext/README.md)
 
 ## Networking 11%
 TBD
