@@ -28,6 +28,8 @@ See [Testing ELB http/https support, access logs, Proxy mode and connection drai
 ## Security 12%
 ### Container security with PodSecurityPolicy
 See [Practical guide to PodSecurityPolicy](security/podsecuritypolicy/README.md)
+### Declare a NetworkPolicy
+See [Quick test of NetworkPolicy](security/networkpolicy/README.md)
 
 ## Networking 11%
 TBD
