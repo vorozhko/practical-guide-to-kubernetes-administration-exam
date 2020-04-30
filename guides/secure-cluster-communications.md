@@ -113,3 +113,6 @@ When the container’s command runs, the pieces of the key will be available in:
 
 To verify files location you can exec into pod:
 ```kubectl exec -ti nginx-deployment-67844cc956-4c5xk -- ls /etc/secret-volume```
+
+## Reference
+[Manage TLS Certificates in a Cluster](https://kubernetes.io/docs/tasks/tls/managing-tls-in-a-cluster/)

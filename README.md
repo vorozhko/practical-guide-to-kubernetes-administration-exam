@@ -30,6 +30,8 @@ See [Testing ELB http/https support, access logs, Proxy mode and connection drai
 See [Practical guide to PodSecurityPolicy](security/podsecuritypolicy/README.md)
 ### Declare a NetworkPolicy
 See [Quick test of NetworkPolicy](security/networkpolicy/README.md)
+### Manage TLS Certificates in a Cluster
+See [Practical guide to secure cluster communications](guides/secure-cluster-communications.md)
 
 ## Networking 11%
 TBD
