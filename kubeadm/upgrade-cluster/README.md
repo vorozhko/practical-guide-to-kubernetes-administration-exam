@@ -2,22 +2,18 @@
 
 In this guide I install Kuberentes version 1.17 and then upgrade it to the latest stable version(in time of writing 1.18). 
 
-## Provision infrastructure with pre-installed kubeadm
->When terraform part is done jump back to this guide.
-
-To create test server with pre-installed kubeadm using terraform follow [High Available Kubernetes control plane guide](../ha-control-plane/README.md).
-
-In short just do:
-```bash
-cd ../ha-control-plane
-terraform init
-terraform plan
-terraform apply
-``` 
-
 ## Before begin
 
-### Setup Kuberentes 1.17.xx
+### Provision Kubernetes 1.17.xx
+
+First we need a Kubernets cluster.
+Choose one of following setup if you don't have your own:
+* [single master on Vagrant](../../vagrant/kubernetes/README.md)
+* [multi master with worker nodes on AWS](../ha-control-plane/README.md)
+
+When server nodes are up:
+* ssh to each node in case of HA cluster
+* re-install kubeadm, kubectl and kubelet with version tag 1.17.4-00 instead of mainstream. See below:
 
 ```bash
 VERSION=1.17.4-00 
