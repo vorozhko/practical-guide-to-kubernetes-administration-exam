@@ -47,6 +47,9 @@ Upload kubelet-init.sh in **/var/lib/cloud/scripts/per-instance/** which will be
 }
 ```
 
+## Unanswered questions
+**How to provision additioanl control plane nodes and worker nodes which require tokens and certificate keys to join the cluster?**
+
 ## References
 * [Packer Kuberenetes control plane JSON](master.json)
 * [Kubeadm provisioner script install-kubeadm.sh](../kubeadm/scripts/install-kubeadm.sh)
