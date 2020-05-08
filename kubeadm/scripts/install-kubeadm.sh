@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# Prevent interactive dialogs to popup in non interactive shell
+# See https://askubuntu.com/questions/506158/unable-to-initialize-frontend-dialog-when-using-ssh
+export DEBIAN_FRONTEND=noninteractive
+
 # Letting iptable to see bridge traffic
 
 ## Load kernel module
