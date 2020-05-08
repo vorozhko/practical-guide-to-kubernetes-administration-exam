@@ -1,4 +1,4 @@
-# Prepare Kubernetes images with Packer
+# Build Kubernetes control plane image with Packer
 
 ## Pakcer Builders
 **Builders** section define base image, EC2 instate type and other settings to build an image.
