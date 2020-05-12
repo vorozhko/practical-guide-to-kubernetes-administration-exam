@@ -53,3 +53,10 @@ kubeconfig_*
 *.box
 
 # End of https://www.gitignore.io/api/vagrant
+#
+
+### footloose ###
+footloose/shared
+footloose/cluster-key*
+
+# End of footloose

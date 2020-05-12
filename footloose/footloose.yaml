@@ -1,0 +1,54 @@
+cluster:
+  name: etcd
+  privateKey: cluster-key
+machines:
+- count: 3
+  spec:
+    backend: docker
+    image: quay.io/footloose/ubuntu18.04
+    name: member%d
+    networks:
+    - kind
+    volumes:
+    - name: cache
+      type: bind
+      source: /tmp/etcd-cache
+      destination: /var/cache/etcdadm/etcd
+      ReadOnly: false
+    - name: shared
+      type: bind
+      source: /home/yaroslav/git/vorozhko/practical-guide-to-kubernetes-exam/footloose/shared
+      destination: /shared
+      ReadOnly: false
+    portMappings:
+    - containerPort: 22
+- count: 1
+  spec:
+    backend: docker
+    image: quay.io/footloose/ubuntu18.04
+    name: lb%d
+    networks:
+    - kind
+    portMappings:
+    - containerPort: 22
+- count: 1
+  spec:
+    backend: docker
+    image: quay.io/footloose/ubuntu18.04
+    name: proxy%d
+    networks:
+    - kind
+    volumes:
+    - name: cache
+      type: bind
+      source: /tmp/etcd-cache
+      destination: /var/cache/etcdadm/etcd
+      ReadOnly: false
+    - name: shared
+      type: bind
+      source: /home/yaroslav/git/vorozhko/practical-guide-to-kubernetes-exam/footloose/shared
+      destination: /shared
+      ReadOnly: false
+    portMappings:
+    - containerPort: 22
+
