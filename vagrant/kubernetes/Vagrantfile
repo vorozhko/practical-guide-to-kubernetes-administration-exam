@@ -4,12 +4,46 @@
 BOX_IMAGE = "ubuntu/bionic64"
 NODE_COUNT = 2
 
+$configureMaster = <<-SCRIPT
+    echo "This is master"
+    # ip of this box
+    IP_ADDR=`ifconfig enp0s8 | grep netmask | awk '{print $2}'| cut -f2 -d:`
+
+    #hostname of this box
+    HOST_NAME=$(hostname -s)
+
+    #install k8s master
+    kubeadm init --pod-network-cidr=192.168.0.0/16 --apiserver-advertise-address=$IP_ADDR --apiserver-cert-extra-sans=$IP_ADDR --node-name $HOST_NAME
+
+    #setup kubectl for vagrant user
+    sudo --user=vagrant mkdir -p /home/vagrant/.kube
+    cp -i /etc/kubernetes/admin.conf /home/vagrant/.kube/config
+    chown $(id -u vagrant):$(id -g vagrant) /home/vagrant/.kube/config
+    
+    #copy kube-config in shared folder to access Kubernetes from guest machine
+    cp /etc/kubernetes/admin.conf /vagrant/kube-config
+
+    # install calico plugin
+    export KUBECONFIG=/etc/kubernetes/admin.conf
+    kubectl apply -f https://docs.projectcalico.org/v3.11/manifests/calico.yaml
+
+    #generate worker join command and store in shared /vagrant folder
+    kubeadm token create --print-join-command >> /vagrant/kubeadm_join_cmd.sh
+    chmod +x /vagrant/kubeadm_join_cmd.sh
+SCRIPT
+
+$configureNode = <<-SCRIPT
+    echo "This is worker"
+    sh /vagrant/kubeadm_join_cmd.sh
+SCRIPT
+
 Vagrant.configure("2") do |config|  
   config.vm.define "master" do |subconfig|
     subconfig.vm.box = BOX_IMAGE
     subconfig.vm.hostname = "master"
     subconfig.vm.network :private_network, ip: "10.0.0.10"
     subconfig.vm.network :public_network, ip: "10.0.1.10", bridge: "wlp2s0"
+    subconfig.vm.provision "shell", inline: $configureMaster
   end
 
   (1..NODE_COUNT).each do |i|
@@ -18,6 +52,7 @@ Vagrant.configure("2") do |config|
       subconfig.vm.hostname="worker#{i}"
       subconfig.vm.network :private_network, ip: "10.0.0.#{i+10}"
       subconfig.vm.network :public_network, ip: "10.0.1.#{i+10}", bridge: "wlp2s0"
+      subconfig.vm.provision "shell", inline: $configureNode
     end
   end
 
@@ -27,7 +62,13 @@ Vagrant.configure("2") do |config|
     vb.cpus = 2
   end
   
+  #install dns
   config.vm.provision "shell", inline: <<-SHELL
     apt-get install -y avahi-daemon libnss-mdns
+  SHELL
+
+  #install kubeadm kubectl kubelet packages
+  config.vm.provision "shell", inline: <<-SHELL
+  /vagrant/install-kubeadm.sh
   SHELL
 end
