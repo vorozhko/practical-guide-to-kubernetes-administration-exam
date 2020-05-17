@@ -76,3 +76,10 @@ EOF
 apt-get update
 apt-get install -y kubelet kubectl kubeadm
 apt-mark hold kubelet kubeadm kubectl
+
+
+# ip of this box
+IP_ADDR=`ifconfig enp0s8 | grep netmask | awk '{print $2}'| cut -f2 -d:`
+# set node-ip
+sudo echo "KUBELET_EXTRA_ARGS=--node-ip=$IP_ADDR" >> /etc/default/kubelet
+sudo systemctl restart kubelet
