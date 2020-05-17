@@ -60,3 +60,9 @@ footloose/shared
 footloose/cluster-key*
 
 # End of footloose
+#
+
+
+# Vagrant artifacts
+vagrant/kubernetes/kube-config
+vagrant/kubernetes/kubeadm_join_cmd.sh
