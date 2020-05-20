@@ -12,7 +12,7 @@ For Terraform templates to work you need to prepare default aws profile and adju
 
 See [Practical guide to Kubernetes Single control plane with Kubeadm](kubeadm/single-control-plane/README.md)
 
-If you prefer Vagrant box see [how to run Kubernetes Single control plane with Vagrant](vagrant/kubernetes/README.md)
+If you prefer Vagrant box see [how to run Kubernetes Single control plane using Vagrant](vagrant/kubernetes/README.md)
 
 ### Configure High Available Kubernetes cluster
 
@@ -60,7 +60,7 @@ TBD
 
 ## Troubleshooting 10%
 
-TBD
+* [Checking Kubernetes cluster health](guides/kubernetes-cluster-health.md)
 
 ## Storage 7%
 
@@ -68,7 +68,7 @@ TBD
 
 ## Application Lifecycle Management 8%
 
-TBD
+* [Practical guide to application deployment upgrade process](guides/Application%20life%20cycle%20management.md)
 
 ## Scheduling 5%
 
